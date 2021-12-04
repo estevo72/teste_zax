@@ -41,21 +41,33 @@ mock_teste1 = {
 }
 
 mock_teste2 = {'nome_loja': 'Magazine', 'nome_motoboy': 'João',
-               'quantidade_pedidos': 3, 'valor_rececbido_pelo_motoboy': 4.5}  # loja1 moto1
+               'quantidade_pedidos': 2, 'valor_rececbido_pelo_motoboy': 4.5} 
 
 mock_teste3 = {'nome_loja': 'Americanas', 'nome_motoboy': 'Carlos',
-               'quantidade_pedidos': 4, 'valor_rececbido_pelo_motoboy': 4.5}  # loja2 moto2
+               'quantidade_pedidos': 4, 'valor_rececbido_pelo_motoboy': 4.5}  
 
 mock_teste4 = {'nome_loja': 'Magazine', 'nome_motoboy': 'João',
-               'quantidade_pedidos': 1, 'valor_rececbido_pelo_motoboy': 9.0}  # loja1 moto1 True
+               'quantidade_pedidos': 1, 'valor_rececbido_pelo_motoboy': 9.0} 
 
 mock_teste5 = {'nome_loja': 'Casas Bahia', 'nome_motoboy': 'Alberto',
-               'quantidade_pedidos': 2, 'valor_rececbido_pelo_motoboy': 49.0} #loja3 moto3 True
+               'quantidade_pedidos': 3, 'valor_rececbido_pelo_motoboy': 47.0} 
 
 
 class MyTest(unittest.TestCase):
     def test_exclusive_motoboy(self):
         self.assertEqual(executa_entrega(loja1, moto4), mock_teste1)
+    
+    def test_non_exclusive_motoboy(self):
+        self.assertEqual(executa_entrega(loja1, moto1), mock_teste2)
+
+    def test_non_exclusive_motoboy_another_store(self):
+        self.assertEqual(executa_entrega(loja2, moto2), mock_teste3)
+
+    def test_non_exclusive_motoboy_another_get_all_items(self):
+        self.assertEqual(executa_entrega(loja1, moto1, True), mock_teste4)
+
+    def test_non_exclusive_motoboy_another_store_all_items(self):
+        self.assertEqual(executa_entrega(loja3, moto3, True), mock_teste5)
 
 
 if __name__ == '__main__':
